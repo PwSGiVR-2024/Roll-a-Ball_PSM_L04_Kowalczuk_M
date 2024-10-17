@@ -11,7 +11,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (other.GetComponent<MovementController>() != null)
         {
-            other.transform.position = transform.position;
+            spawnPointTransform.transform.position = transform.position;
         }
     }
 }

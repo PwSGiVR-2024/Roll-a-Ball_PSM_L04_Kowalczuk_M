@@ -6,6 +6,7 @@ public class Elevator : MonoBehaviour
 {
     [SerializeField] private Vector3 movementVector = Vector3.zero;
     [SerializeField] float movementLimit = 2f, currentMovement = 0f;
+    [SerializeField] GameObject hitbox;
 
     private void Update()
     {
@@ -16,6 +17,5 @@ public class Elevator : MonoBehaviour
                 movementVector = -movementVector;
                 currentMovement = currentMovement - movementLimit;
             }
-
     }
 }
