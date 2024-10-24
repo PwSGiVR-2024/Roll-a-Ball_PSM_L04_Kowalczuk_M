@@ -12,14 +12,14 @@ public class MovementController : MonoBehaviour
     public void collectCollectible()
     {
         score++;
-        Debug.Log("Score: " + score);
+        //Debug.Log("Score: " + score);
         GameManager.Instance.getCollectedPoints(score);
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log("Score: " + score);
+        //Debug.Log("Score: " + score);
     }
 
     private void Update()
