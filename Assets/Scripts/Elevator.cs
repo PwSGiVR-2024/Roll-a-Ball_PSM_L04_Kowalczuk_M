@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    [SerializeField] private Vector3 movementVector = Vector3.zero;
-    [SerializeField] float movementLimit = 2f, currentMovement = 0f;
-    [SerializeField] GameObject hitbox;
+    [SerializeField] private Vector3 movementVector, centerPoint;
+    [SerializeField] float movementLimit = 2f, currentMovement = 0f, movementSpeed;
+
+    private void Start()
+    {
+        centerPoint = transform.position;
+    }
 
     private void Update()
     {
-            transform.position += movementVector * Time.deltaTime;
-            currentMovement += Time.deltaTime;
-            if (currentMovement >= movementLimit)
-            {
-                movementVector = -movementVector;
-                currentMovement = currentMovement - movementLimit;
-            }
+        float passedTime = Time.deltaTime;
+        transform.position += movementVector * passedTime * movementSpeed;
+        currentMovement += passedTime * movementSpeed;
+        if (currentMovement >= movementLimit)
+        {
+            movementVector = -movementVector;
+            currentMovement = currentMovement - movementLimit;
+        }
     }
 }
