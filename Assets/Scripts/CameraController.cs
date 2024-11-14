@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
+    private Transform playerTransform;
     private Vector3 playerToCameraVector;
 
     void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerToCameraVector =  transform.position - playerTransform.position;
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         transform.position = playerTransform.position + playerToCameraVector;
     }

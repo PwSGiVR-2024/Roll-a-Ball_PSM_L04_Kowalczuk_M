@@ -11,6 +11,7 @@ public class SpawnPoint : MonoBehaviour
     {
         if(playerTransform.position.y <= fallLevel)
         {
+            playerTransform.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             playerTransform.position = transform.position;
         }
     }

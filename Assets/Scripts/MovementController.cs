@@ -6,15 +6,7 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] private float thrust = 10f, jumpForce = 1f, jumpCooldown = 2f, jumpCooldownCurrent = 2f;
     [SerializeField] Rigidbody rb;
-    [SerializeField] int score = 0;
     [SerializeField] Vector3 movementForce;
-
-    public void collectCollectible()
-    {
-        score++;
-        //Debug.Log("Score: " + score);
-        GameManager.Instance.getCollectedPoints(score);
-    }
 
     private void Start()
     {
@@ -23,13 +15,18 @@ public class MovementController : MonoBehaviour
     }
 
     private void Update()
+    { 
+        getInputs();
+    }
+
+    private void getInputs()
     {
         if (jumpCooldownCurrent < jumpCooldown)
         {
             jumpCooldownCurrent += Time.deltaTime;
         }
         movementForce = Vector3.zero;
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             movementForce = new Vector3(0f, 0f, thrust);
         }
