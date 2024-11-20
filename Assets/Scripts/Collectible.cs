@@ -9,7 +9,7 @@ public class Collectible : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(new Vector3(20f, 20f, 20f) * Time.deltaTime);
+        transform.Rotate(new Vector3(40f, 0f, 0f) * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
