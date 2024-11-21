@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] int totalPointsNumber, pointsNumber = 0;
     [SerializeField] Collectible[] points;
+    [SerializeField] Trampoline[] trampolines;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] GameObject winText;
+    [SerializeField] AudioClip coinSound, trampolineSound;
     AudioSource audioSource;
     private void Awake()
     {
@@ -25,18 +27,28 @@ public class GameManager : MonoBehaviour
     {
         pointsNumber = 0;
         points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
+        trampolines = FindObjectsByType<Trampoline>(FindObjectsSortMode.None);
         audioSource = GetComponent<AudioSource>();
         totalPointsNumber = points.Length;
         for(int i = 0; i < points.Length; i++)
         {
             points[i].GetComponent<Collectible>().pickupEvent += collectPoint;
         }
+        for (int i = 0; i < trampolines.Length; i++)
+        {
+            trampolines[i].GetComponent<Trampoline>().trampolineEvent += trampolineJump;
+        }
         scoreText.text = "Score: " + pointsNumber.ToString();
     }
 
+    public void trampolineJump()
+    {
+        audioSource.resource = trampolineSound;
+        audioSource.Play();
+    }
     public void collectPoint()
     {
-        
+        audioSource.resource = coinSound;
         audioSource.Play();
         pointsNumber++;
         scoreText.text = "Score: " + pointsNumber.ToString();

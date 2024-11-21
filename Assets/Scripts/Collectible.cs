@@ -6,7 +6,6 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public event Action pickupEvent;
-
     private void Update()
     {
         transform.Rotate(new Vector3(40f, 0f, 0f) * Time.deltaTime);
