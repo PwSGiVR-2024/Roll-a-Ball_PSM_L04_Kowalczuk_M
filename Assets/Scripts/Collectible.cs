@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+    [SerializeField] private LayerMask playerMask;
     public event Action pickupEvent;
-    private void Update()
-    {
-        transform.Rotate(new Vector3(40f, 0f, 0f) * Time.deltaTime);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        pickupEvent?.Invoke();
-        gameObject.SetActive(false);
+        if (((1 << other.gameObject.layer) & playerMask) != 0)
+        {        
+            gameObject.SetActive(false);
+            pickupEvent?.Invoke();
+        }
     }
 }

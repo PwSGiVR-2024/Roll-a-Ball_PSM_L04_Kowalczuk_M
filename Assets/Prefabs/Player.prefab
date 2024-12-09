@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1093451256633268555}
   - component: {fileID: 6044423442574177974}
   - component: {fileID: 5524736125177108515}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -154,5 +154,4 @@ MonoBehaviour:
   jumpCooldown: 1
   jumpCooldownCurrent: 1
   rb: {fileID: 0}
-  score: 0
   movementForce: {x: 0, y: 0, z: 0}
