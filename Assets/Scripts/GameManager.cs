@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public GameManager Instance;
     [SerializeField] int totalPointsNumber, pointsNumber = 0;
     [SerializeField] Collectible[] points;
     [SerializeField] Trampoline[] trampolines;
@@ -20,11 +20,27 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         winText.SetActive(false);
-        Instance = this;
+        int gameStatus = FindObjectsByType<GameManager>(FindObjectsSortMode.None).Length;
+        if (gameStatus > 1) 
+        { 
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        SceneManager.activeSceneChanged += OnSceneLoaded;
     }
 
-    void Start()
+    void OnSceneLoaded(Scene scene1, Scene scene2)
     {
+        SetUpParameters();
+    }
+    void SetUpParameters()
+    {
+        audioSource = FindAnyObjectByType<AudioSource>();
+        winText.SetActive(false );
         pointsNumber = 0;
         points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
         trampolines = FindObjectsByType<Trampoline>(FindObjectsSortMode.None);
