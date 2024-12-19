@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] GameObject winText;
     [SerializeField] AudioClip coinSound, trampolineSound;
-    AudioSource audioSource;
+    [SerializeField] AudioSource audioSource;
     private void Awake()
     {
         winText.SetActive(false);
@@ -31,6 +31,20 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         SceneManager.activeSceneChanged += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneLoaded;
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i].GetComponent<Collectible>().pickupEvent -= collectPoint;
+        }
+        for (int i = 0; i < trampolines.Length; i++)
+        {
+            trampolines[i].GetComponent<Trampoline>().trampolineEvent -= trampolineJump;
+        }
+        Destroy(gameObject);
     }
 
     void OnSceneLoaded(Scene scene1, Scene scene2)
