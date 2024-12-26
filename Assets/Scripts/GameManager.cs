@@ -49,12 +49,16 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene1, Scene scene2)
     {
+        if(SceneManager.GetActiveScene().buildIndex == 0 && SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCount - 1)
+        {
+            Destroy(gameObject);
+        }
         SetUpParameters();
     }
     void SetUpParameters()
     {
         audioSource = FindAnyObjectByType<AudioSource>();
-        winText.SetActive(false );
+        winText.SetActive(false);
         pointsNumber = 0;
         points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
         trampolines = FindObjectsByType<Trampoline>(FindObjectsSortMode.None);
