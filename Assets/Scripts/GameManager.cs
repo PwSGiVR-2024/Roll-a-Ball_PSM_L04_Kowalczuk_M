@@ -10,16 +10,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameManager Instance;
-    [SerializeField] int totalPointsNumber, pointsNumber = 0;
-    [SerializeField] Collectible[] points;
+    //[SerializeField] int totalPointsNumber, pointsNumber = 0;
+    //[SerializeField] Collectible[] points;
     [SerializeField] Trampoline[] trampolines;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] GameObject winText;
+    //[SerializeField] TMP_Text scoreText;
+    //[SerializeField] GameObject winText;
     [SerializeField] AudioClip coinSound, trampolineSound;
     [SerializeField] AudioSource audioSource;
     private void Awake()
     {
-        winText.SetActive(false);
+        //winText.SetActive(false);
         int gameStatus = FindObjectsByType<GameManager>(FindObjectsSortMode.None).Length;
         if (gameStatus > 1) 
         { 
@@ -36,10 +36,10 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.activeSceneChanged -= OnSceneLoaded;
-        for (int i = 0; i < points.Length; i++)
-        {
-            points[i].GetComponent<Collectible>().pickupEvent -= collectPoint;
-        }
+        //for (int i = 0; i < points.Length; i++)
+        //{
+        //    points[i].GetComponent<Collectible>().pickupEvent -= collectPoint;
+        //}
         for (int i = 0; i < trampolines.Length; i++)
         {
             trampolines[i].GetComponent<Trampoline>().trampolineEvent -= trampolineJump;
@@ -58,21 +58,21 @@ public class GameManager : MonoBehaviour
     void SetUpParameters()
     {
         audioSource = FindAnyObjectByType<AudioSource>();
-        winText.SetActive(false);
-        pointsNumber = 0;
-        points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
+        //winText.SetActive(false);
+        //pointsNumber = 0;
+        //points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
         trampolines = FindObjectsByType<Trampoline>(FindObjectsSortMode.None);
         audioSource = GetComponent<AudioSource>();
-        totalPointsNumber = points.Length;
-        for(int i = 0; i < points.Length; i++)
-        {
-            points[i].GetComponent<Collectible>().pickupEvent += collectPoint;
-        }
+        //totalPointsNumber = points.Length;
+        //for(int i = 0; i < points.Length; i++)
+        //{
+        //    points[i].GetComponent<Collectible>().pickupEvent += collectPoint;
+        //}
         for (int i = 0; i < trampolines.Length; i++)
         {
             trampolines[i].GetComponent<Trampoline>().trampolineEvent += trampolineJump;
         }
-        scoreText.text = "Score: " + pointsNumber.ToString();
+        //scoreText.text = "Score: " + pointsNumber.ToString();
     }
 
     public void trampolineJump()
@@ -84,21 +84,21 @@ public class GameManager : MonoBehaviour
     {
         audioSource.resource = coinSound;
         audioSource.Play();
-        pointsNumber++;
-        scoreText.text = "Score: " + pointsNumber.ToString();
-        if (pointsNumber >= totalPointsNumber)
-        {
-            winText.SetActive(true);
-            //Debug.Log("All points collected!");
-            Debug.Log(SceneManager.GetActiveScene().buildIndex + " " + (SceneManager.sceneCountInBuildSettings - 1));
-            if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1)
-            {
-                Invoke(nameof(nextScene), 3f);
-            }
-        }
+        //pointsNumber++;
+        //scoreText.text = "Score: " + pointsNumber.ToString();
+        //if (pointsNumber >= totalPointsNumber)
+        //{
+        //    winText.SetActive(true);
+        //    Debug.Log("All points collected!");
+        //    Debug.Log(SceneManager.GetActiveScene().buildIndex + " " + (SceneManager.sceneCountInBuildSettings - 1));
+        //    if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1)
+        //    {
+        //        Invoke(nameof(nextScene), 3f);
+        //    }
+        //}
     }
 
-    private void nextScene()
+    public void nextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
