@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager Instance;
     //[SerializeField] int totalPointsNumber, pointsNumber = 0;
     //[SerializeField] Collectible[] points;
     [SerializeField] Trampoline[] trampolines;
@@ -57,6 +56,7 @@ public class GameManager : MonoBehaviour
     }
     void SetUpParameters()
     {
+        FindFirstObjectByType<PlayerCollision>().playerDie += levelFailed;
         audioSource = FindAnyObjectByType<AudioSource>();
         //winText.SetActive(false);
         //pointsNumber = 0;
@@ -98,6 +98,16 @@ public class GameManager : MonoBehaviour
         //}
     }
 
+    public void levelFailed()
+    {
+        FindFirstObjectByType<PlayerCollision>().playerDie -= levelFailed;
+        Invoke(nameof(reloadLevel), 3f);
+    }
+
+    private void reloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
     public void nextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
