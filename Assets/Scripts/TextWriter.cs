@@ -29,13 +29,13 @@ public class TextWriter : MonoBehaviour
         messageText.text = text;
         messageText.enabled = true;
         textQueue++;
-        Debug.Log("write " + textQueue);
+        //Debug.Log("write " + textQueue);
         Invoke(nameof(hideText), time);
     }
 
     public void hideText()
     {
-        Debug.Log("hide " + textQueue);
+        //Debug.Log("hide " + textQueue);
         if (textQueue <= 1)
         {
             messageText.enabled = false;
