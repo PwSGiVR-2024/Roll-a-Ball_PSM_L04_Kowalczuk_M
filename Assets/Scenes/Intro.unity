@@ -987,7 +987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24ecb967060d0b4d9db648fd21c19f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
   trampolines: []
   coinSound: {fileID: 8300000, guid: 1e2be4b69361c9f45b6913edc658b3bd, type: 3}
   trampolineSound: {fileID: 8300000, guid: bd8f5f4673e08a042bc2b43ecf7ee390, type: 3}
@@ -20529,6 +20528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c4b1df9e0d4ac46bde3d6bf6f8612a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAllreadyDead: 0
 --- !u!1001 &1666624536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25774,6 +25774,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6044423442574177974, guid: 90f9e5a57b2465d4992b6c7b322774b9, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6044423442574177974, guid: 90f9e5a57b2465d4992b6c7b322774b9, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6345265196641245232, guid: 90f9e5a57b2465d4992b6c7b322774b9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -25968,10 +25976,6 @@ PrefabInstance:
     - target: {fileID: 502870066129000450, guid: 51532f7a1f2cb3847bec36d6336e9a6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3577618760956560091, guid: 51532f7a1f2cb3847bec36d6336e9a6c, type: 3}
-      propertyPath: range
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5731704759863066630, guid: 51532f7a1f2cb3847bec36d6336e9a6c, type: 3}
       propertyPath: m_Name

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < trampolines.Length; i++)
         {
             trampolines[i].GetComponent<Trampoline>().trampolineEvent -= trampolineJump;
+        }
+        PlayerCollision _player = FindFirstObjectByType<PlayerCollision>();
+        if(_player != null)
+        {
+            _player.playerDie -= levelFailed;
         }
         Destroy(gameObject);
     }
@@ -100,7 +106,6 @@ public class GameManager : MonoBehaviour
 
     public void levelFailed()
     {
-        FindFirstObjectByType<PlayerCollision>().playerDie -= levelFailed;
         Invoke(nameof(reloadLevel), 3f);
     }
 
