@@ -4,6 +4,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using Unity.VisualScripting;
@@ -16,7 +17,28 @@ public class GameManager : MonoBehaviour
     //[SerializeField] TMP_Text scoreText;
     //[SerializeField] GameObject winText;
     [SerializeField] AudioClip coinSound, trampolineSound;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSource, musicSource;
+    [SerializeField] TextWriter messageText;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float fallLevel = -6f;
+
+    private async void startPlayerOffMapCheck()
+    {
+        await playerOffMapChceck(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public async Task playerOffMapChceck(int index)
+    {
+        while (playerTransform != null && index == SceneManager.GetActiveScene().buildIndex)
+        {
+            if (playerTransform.position.y <= fallLevel)
+            {
+                playerTransform.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+                playerTransform.position = transform.position;
+            }
+            await Awaitable.WaitForSecondsAsync(5);
+        }
+    }
     private void Awake()
     {
         //winText.SetActive(false);
@@ -62,13 +84,20 @@ public class GameManager : MonoBehaviour
     }
     void SetUpParameters()
     {
-        FindFirstObjectByType<PlayerCollision>().playerDie += levelFailed;
-        audioSource = FindAnyObjectByType<AudioSource>();
+        if (FindFirstObjectByType<PlayerCollision>())
+        {
+            playerTransform = FindFirstObjectByType<PlayerCollision>().transform;
+            FindFirstObjectByType<PlayerCollision>().playerDie += levelFailed;
+        }
+        startPlayerOffMapCheck();
+        //audioSource = FindAnyObjectByType<AudioSource>();
         //winText.SetActive(false);
         //pointsNumber = 0;
         //points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
         trampolines = FindObjectsByType<Trampoline>(FindObjectsSortMode.None);
         audioSource = GetComponent<AudioSource>();
+        musicSource = GetComponentInChildren<AudioSource>();
+        messageText = GetComponentInChildren<TextWriter>();
         //totalPointsNumber = points.Length;
         //for(int i = 0; i < points.Length; i++)
         //{
@@ -106,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void levelFailed()
     {
+        messageText.writeText("YOU DIED", 3);
         Invoke(nameof(reloadLevel), 3f);
     }
 
