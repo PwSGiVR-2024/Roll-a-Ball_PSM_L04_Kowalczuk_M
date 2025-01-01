@@ -5,15 +5,20 @@ public class PlayerCollision : MonoBehaviour
 {
     public event Action playerDie;
     [SerializeField] private bool playerAllreadyDead = false;
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private GameObject particlesPrefab;
 
-    private void Start()
+    private void Awake()
     {
         playerAllreadyDead = false;
+        GameObject _particles = Instantiate(particlesPrefab, transform.position, Quaternion.identity);
+        particles = _particles.GetComponentInChildren<ParticleSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("KillBox") && !playerAllreadyDead)
         {
+            particles.Play();
             playerAllreadyDead = true;
             playerDie?.Invoke();
             Destroy(gameObject);

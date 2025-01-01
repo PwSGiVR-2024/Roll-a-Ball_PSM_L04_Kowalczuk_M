@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-public class Level0 : LevelManager
+public class WinOnWinboxEnter : LevelManager
 {
     [SerializeField] private WinHitBox winHitBox;
     private void Start()
