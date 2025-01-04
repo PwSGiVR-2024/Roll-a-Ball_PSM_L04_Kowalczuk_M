@@ -7,12 +7,15 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private bool playerAllreadyDead = false;
     [SerializeField] private ParticleSystem particles;
     [SerializeField] private GameObject particlesPrefab;
-
+    public void killPlayer()
+    {
+        playerDie?.Invoke();
+    }
     private void Awake()
     {
         playerAllreadyDead = false;
-        GameObject _particles = Instantiate(particlesPrefab, transform.position, Quaternion.identity);
-        particles = _particles.GetComponentInChildren<ParticleSystem>();
+        GameObject _particles = Instantiate(particlesPrefab, transform.position, Quaternion.Euler(90f, 0f, 0f));
+        particles = _particles.GetComponent<ParticleSystem>();
     }
     private void OnTriggerEnter(Collider other)
     {

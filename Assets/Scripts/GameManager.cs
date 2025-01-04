@@ -33,8 +33,7 @@ public class GameManager : MonoBehaviour
         {
             if (playerTransform.position.y <= fallLevel)
             {
-                playerTransform.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
-                playerTransform.position = transform.position;
+                playerTransform.GetComponent<PlayerCollision>().killPlayer();
             }
             await Awaitable.WaitForSecondsAsync(5);
         }

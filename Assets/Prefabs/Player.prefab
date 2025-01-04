@@ -191,4 +191,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAllreadyDead: 0
   particles: {fileID: 0}
-  particlesPrefab: {fileID: 8389015788455648990, guid: 43cb9ca9da9c26248a81a9bfb8356a2c, type: 3}
+  particlesPrefab: {fileID: 1666870346871863253, guid: 4fa92893bd65d1e4a8c03febbdc36bdc, type: 3}
