@@ -4,6 +4,7 @@ public class ActivateAnimation : MonoBehaviour, IActivable
 {
     [SerializeField] Animator animator;
     [SerializeField] string animatorTriggerName;
+    [SerializeField] AudioSource audioSource;
 
     private void Awake()
     {
@@ -12,6 +13,10 @@ public class ActivateAnimation : MonoBehaviour, IActivable
     public void Activate()
     {
         animator.SetTrigger(animatorTriggerName);
+        if(audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 
     public void Activate(float delay)

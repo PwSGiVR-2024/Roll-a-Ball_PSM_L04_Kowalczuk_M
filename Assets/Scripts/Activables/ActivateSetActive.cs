@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ActivateSetActive : MonoBehaviour, IActivable
 {
     [SerializeField] bool mode;
+    [SerializeField] AudioSource audioSource;
 
     private void Awake()
     {
@@ -11,6 +13,10 @@ public class ActivateSetActive : MonoBehaviour, IActivable
     public void Activate()
     {
         gameObject.SetActive(mode);
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 
     public void Activate(float delay)
