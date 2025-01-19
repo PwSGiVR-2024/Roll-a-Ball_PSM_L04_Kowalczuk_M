@@ -15,11 +15,12 @@ public class CompassGizmo : MonoBehaviour
     [SerializeField]
     float distance;
 
-    void Start()
+    private void Start()
     {
+        Debug.Log("enabled");
         Collectible[] points;
         points = FindObjectsByType<Collectible>(FindObjectsSortMode.None);
-        for(int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points.Length; i++)
         {
             points[i].pickupEvent += updateCoinList;
             coins.Add(points[i].transform);

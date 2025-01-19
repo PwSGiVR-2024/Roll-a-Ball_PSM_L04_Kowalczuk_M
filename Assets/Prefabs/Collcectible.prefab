@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 4384337122831271423}
   - component: {fileID: 8505769922218460459}
   - component: {fileID: 7391689501176798414}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collcectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,6 +176,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcad1eb557bcea4589a503418399ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 512
+  activableObjects: []
