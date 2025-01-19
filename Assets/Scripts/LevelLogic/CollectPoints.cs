@@ -6,6 +6,7 @@ public class CollectPoints : MonoBehaviour, IWinCondition
     [SerializeField] int totalPointsNumber, pointsNumber = 0;
     [SerializeField] Collectible[] points;
     [SerializeField] TextWriter messageText;
+    [SerializeField] string finalMessage;
     private bool condition;
 
     public bool checkCondition()
@@ -30,6 +31,7 @@ public class CollectPoints : MonoBehaviour, IWinCondition
         messageText.writeText("Collected " + pointsNumber.ToString() + " out of " + totalPointsNumber.ToString());
         if (pointsNumber >= totalPointsNumber)
         {
+            messageText.writeText(finalMessage);
             condition = true;
         }
     }

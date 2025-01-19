@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject killBox;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Attack()
     {
+        audioSource.Play();
         killBox.SetActive(true);
     }
 
